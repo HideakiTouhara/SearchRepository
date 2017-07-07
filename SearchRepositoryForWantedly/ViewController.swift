@@ -18,7 +18,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         
         searchText.delegate = self
-        searchText.placeholder = "キーワードに関連したRepository名を表示します"
+        searchText.placeholder = "キーワードに関連したRepositoryを表示します"
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,11 +35,24 @@ class ViewController: UIViewController, UISearchBarDelegate {
     }
     
     func searchRepo(keyword: String) {
+        // urlオブジェクトの作成
         let keyword_encode = keyword.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
-        
         let URL = Foundation.URL(string: "https://api.github.com/search/repositories?q=\(keyword_encode!)")
         
-        print(URL)
+        //jsonダウンロード
+        let req = URLRequest(url: URL!)
+        let configuration = URLSessionConfiguration.default
+        let session = URLSession(configuration: configuration, delegate: nil, delegateQueue: OperationQueue.main)
+        let task = session.dataTask(with: req, completionHandler: {
+            (data, request, error) in
+            do {
+                let json = try JSONSerialization.jsonObject(with: data!) as! [String: Any]
+                print("count = \(json["total_count"])")
+            } catch {
+                print("パースのときにエラー")
+            }
+        })
+        task.resume()
     }
 
 
