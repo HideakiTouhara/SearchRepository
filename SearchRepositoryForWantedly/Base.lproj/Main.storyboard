@@ -68,6 +68,10 @@
                             <constraint firstAttribute="trailingMargin" secondItem="jIQ-dO-Mjx" secondAttribute="trailing" constant="-20" id="szw-KL-v1i"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="searchText" destination="28V-C9-aWV" id="nQM-KN-8UB"/>
+                        <outlet property="tableView" destination="Bpj-Y6-Ici" id="MiF-wT-uXU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
