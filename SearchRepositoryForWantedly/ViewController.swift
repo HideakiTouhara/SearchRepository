@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UISearchBarDelegate {
+class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource {
     
     @IBOutlet weak var searchText: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
@@ -21,6 +21,8 @@ class ViewController: UIViewController, UISearchBarDelegate {
         
         searchText.delegate = self
         searchText.placeholder = "キーワードに関連したRepositoryを表示します"
+        
+        tableView.dataSource = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,6 +51,9 @@ class ViewController: UIViewController, UISearchBarDelegate {
             (data, request, error) in
             do {
                 let json = try JSONSerialization.jsonObject(with: data!) as! [String: Any]
+                
+                self.repoList.removeAll()
+                
                 if let items = json["items"] as? [[String:Any]] {
                     for item in items {
                         guard let description = item["description"] as? String else {
@@ -68,11 +73,25 @@ class ViewController: UIViewController, UISearchBarDelegate {
                     }
                 }
                 print("repoList[0] = \(self.repoList[0])")
+                self.tableView.reloadData()
             } catch {
                 print("パースのときにエラー")
             }
         })
         task.resume()
+    }
+    
+    //MARK:- TableView
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return repoList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RepoCell", for: indexPath)
+        cell.textLabel?.text = repoList[indexPath.row].description
+        
+        return cell
     }
 
 
