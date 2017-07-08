@@ -12,6 +12,8 @@ class ViewController: UIViewController, UISearchBarDelegate {
     
     @IBOutlet weak var searchText: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    
+    var repoList : [(description: String, url: String, starCount: Int)] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +49,25 @@ class ViewController: UIViewController, UISearchBarDelegate {
             (data, request, error) in
             do {
                 let json = try JSONSerialization.jsonObject(with: data!) as! [String: Any]
-                print("count = \(json["total_count"])")
+                if let items = json["items"] as? [[String:Any]] {
+                    for item in items {
+                        guard let description = item["description"] as? String else {
+                            continue
+                        }
+                        
+                        guard let url = item["html_url"] as? String else {
+                            continue
+                        }
+                        
+                        guard let starCount = item["stargazers_count"] as? Int else {
+                            continue
+                        }
+                        
+                        let repo = (description, url, starCount)
+                        self.repoList.append(repo)
+                    }
+                }
+                print("repoList[0] = \(self.repoList[0])")
             } catch {
                 print("パースのときにエラー")
             }
