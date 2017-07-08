@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SafariServices
 
-class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate,  SFSafariViewControllerDelegate{
     
     @IBOutlet weak var searchText: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
@@ -23,6 +24,8 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
         searchText.placeholder = "キーワードに関連したRepositoryを表示します"
         
         tableView.dataSource = self
+        
+        tableView.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -92,6 +95,22 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
         cell.textLabel?.text = repoList[indexPath.row].description
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let urlToLink = URL(string: repoList[indexPath.row].url)
+        
+        let safariViewController = SFSafariViewController(url: urlToLink!)
+        
+        safariViewController.delegate = self
+        
+        present(safariViewController, animated: true, completion: nil)
+    }
+    
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        dismiss(animated: true, completion: nil)
     }
 
 
