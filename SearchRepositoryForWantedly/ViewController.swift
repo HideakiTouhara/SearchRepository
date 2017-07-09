@@ -13,6 +13,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
     
     @IBOutlet weak var searchText: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var repoList : [(description: String, url: String, starCount: Int)] = []
 
@@ -46,6 +47,8 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
             self.searchRepo()
         })
+        activityIndicator.alpha = 1
+        activityIndicator.startAnimating()
         return true
     }
     
@@ -89,6 +92,8 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
                     }
                 }
                 self.tableView.reloadData()
+                self.activityIndicator.alpha = 0
+                self.activityIndicator.stopAnimating()
             } catch {
                 print("パースのときにエラー")
             }
