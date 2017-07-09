@@ -68,7 +68,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
             do {
                 let json = try JSONSerialization.jsonObject(with: data!) as! [String: Any]
                 
-//                self.repoList.removeAll()
+                self.repoList.removeAll()
                 
                 if let items = json["items"] as? [[String:Any]] {
                     for item in items {
@@ -103,8 +103,18 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        // レポジトリ名をセルに代入
         let cell = tableView.dequeueReusableCell(withIdentifier: "RepoCell", for: indexPath)
         cell.textLabel?.text = repoList[indexPath.row].description
+        
+        // スターカウントを追加
+        let starLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 22, height: 22))
+        starLabel.text = "★\(self.repoList[indexPath.row].starCount)"
+        starLabel.textAlignment = .left
+        starLabel.sizeToFit()
+        cell.accessoryView = starLabel
+
         
         return cell
     }
