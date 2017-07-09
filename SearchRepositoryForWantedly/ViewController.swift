@@ -15,7 +15,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    var repoList : [(description: String, url: String, starCount: Int)] = []
+    var repoList : [(description: String, url: String, starCount: Int, language: String)] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,7 +90,11 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
                             continue
                         }
                         
-                        let repo = (description, url, starCount)
+                        guard let langauge = item["language"] as? String else {
+                            continue
+                        }
+                        
+                        let repo = (description, url, starCount, langauge)
                         self.repoList.append(repo)
                     }
                 }
@@ -115,6 +119,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
         // レポジトリ名をセルに代入
         let cell = tableView.dequeueReusableCell(withIdentifier: "RepoCell", for: indexPath)
         cell.textLabel?.text = repoList[indexPath.row].description
+        cell.detailTextLabel?.text = repoList[indexPath.row].language
         
         // スターカウントを追加
         let starLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 22, height: 22))
