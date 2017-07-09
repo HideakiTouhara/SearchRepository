@@ -22,6 +22,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
         // Do any additional setup after loading the view, typically from a nib.
         
         searchText.delegate = self
+        
         searchText.placeholder = "キーワードに関連したRepositoryを表示します"
         
         tableView.dataSource = self
@@ -49,6 +50,8 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
         })
         activityIndicator.alpha = 1
         activityIndicator.startAnimating()
+        self.repoList.removeAll()
+        tableView.reloadData()
         return true
     }
     
