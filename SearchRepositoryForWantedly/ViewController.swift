@@ -33,14 +33,13 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
         // Dispose of any resources that can be recreated.
     }
     
+    //MARK:- SearchBar
+
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         view.endEditing(true)
         
-//        if let searchWord = searchBar.text {
-//            searchRepo(keyword: searchWord)
-//        }
-        
-        searchRepo()
+        self.searchRepo()
     }
     
     func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -69,7 +68,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
             do {
                 let json = try JSONSerialization.jsonObject(with: data!) as! [String: Any]
                 
-                self.repoList.removeAll()
+//                self.repoList.removeAll()
                 
                 if let items = json["items"] as? [[String:Any]] {
                     for item in items {
@@ -89,7 +88,6 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
                         self.repoList.append(repo)
                     }
                 }
-//                print("repoList[0] = \(self.repoList[0])")
                 self.tableView.reloadData()
             } catch {
                 print("パースのときにエラー")
@@ -122,6 +120,8 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
         
         present(safariViewController, animated: true, completion: nil)
     }
+    
+    //MARK:- Safari
     
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         dismiss(animated: true, completion: nil)
