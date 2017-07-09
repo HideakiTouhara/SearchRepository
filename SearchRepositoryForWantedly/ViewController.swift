@@ -36,12 +36,26 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         view.endEditing(true)
         
-        if let searchWord = searchBar.text {
-            searchRepo(keyword: searchWord)
-        }
+//        if let searchWord = searchBar.text {
+//            searchRepo(keyword: searchWord)
+//        }
+        
+        searchRepo()
     }
     
-    func searchRepo(keyword: String) {
+    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+            self.searchRepo()
+        })
+        return true
+    }
+    
+    func searchRepo() {
+        
+        let keyword = searchText.text!
+        if keyword.isEmpty {
+            return
+        }
         // urlオブジェクトの作成
         let keyword_encode = keyword.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
         let URL = Foundation.URL(string: "https://api.github.com/search/repositories?q=\(keyword_encode!)")
@@ -75,7 +89,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
                         self.repoList.append(repo)
                     }
                 }
-                print("repoList[0] = \(self.repoList[0])")
+//                print("repoList[0] = \(self.repoList[0])")
                 self.tableView.reloadData()
             } catch {
                 print("パースのときにエラー")
