@@ -56,11 +56,8 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
     }
     
     func searchRepo() {
-        
         let keyword = searchText.text!
-        if keyword.isEmpty {
-            return
-        }
+        
         // urlオブジェクトの作成
         let keyword_encode = keyword.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
         let URL = Foundation.URL(string: "https://api.github.com/search/repositories?q=\(keyword_encode!)")
@@ -101,6 +98,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
                 self.tableView.reloadData()
                 self.activityIndicator.alpha = 0
                 self.activityIndicator.stopAnimating()
+
             } catch {
                 print("パースのときにエラー")
             }
