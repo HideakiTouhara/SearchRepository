@@ -302,6 +302,7 @@
 				07BD51B61F0F64CB0023BAFD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
