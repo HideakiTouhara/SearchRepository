@@ -8,8 +8,8 @@ You can search github repository
 [![https://gyazo.com/60436aa18863d37db6be43de97f111da](https://i.gyazo.com/60436aa18863d37db6be43de97f111da.gif)](https://gyazo.com/60436aa18863d37db6be43de97f111da)
 
 ## Function
-・Incremental search
-・Show primary language
-・Show star count
-・See repository page on github
-・This app's color is github's color
+- Incremental search
+- Show primary language
+- Show star count
+- See repository page on github
+- This app's color is github's color
