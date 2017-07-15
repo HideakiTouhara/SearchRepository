@@ -28,6 +28,8 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
         tableView.dataSource = self
         
         tableView.delegate = self
+        
+        setBackgroundImage()
     }
 
     override func didReceiveMemoryWarning() {
@@ -125,6 +127,10 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
         starLabel.textAlignment = .left
         starLabel.sizeToFit()
         cell.accessoryView = starLabel
+        
+        // tableviewの背景画像表示のため、cellの背景を透明に
+        cell.backgroundColor = UIColor.clear
+        cell.contentView.backgroundColor = UIColor.clear
 
         
         return cell
@@ -140,6 +146,17 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
         safariViewController.delegate = self
         
         present(safariViewController, animated: true, completion: nil)
+    }
+    
+    func setBackgroundImage() {
+        
+        let image = UIImage(named: "tableview_background.png")
+        
+        let imageView = UIImageView(image: image)
+        
+        imageView.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: self.tableView.frame.height)
+        
+        self.tableView.backgroundView = imageView
     }
     
     //MARK:- Safari
