@@ -3,9 +3,13 @@
 You can search github repository
 
 ## Demo
-[![https://gyazo.com/539d97cd0cc285fe0589c368d0727c36](https://i.gyazo.com/539d97cd0cc285fe0589c368d0727c36.gif)](https://gyazo.com/539d97cd0cc285fe0589c368d0727c36)
 
-[![https://gyazo.com/60436aa18863d37db6be43de97f111da](https://i.gyazo.com/60436aa18863d37db6be43de97f111da.gif)](https://gyazo.com/60436aa18863d37db6be43de97f111da)
+[![https://gyazo.com/fc8e05f54b00604137179423668852ec](https://i.gyazo.com/fc8e05f54b00604137179423668852ec.gif)](https://gyazo.com/fc8e05f54b00604137179423668852ec)
+
+
+[![https://gyazo.com/424e1600344c073c4b94a37cc6f5202f](https://i.gyazo.com/424e1600344c073c4b94a37cc6f5202f.gif)](https://gyazo.com/424e1600344c073c4b94a37cc6f5202f)
+
+
 
 ## Function
 - Incremental search
