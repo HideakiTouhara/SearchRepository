@@ -9,6 +9,9 @@ You can search github repository
 
 [![https://gyazo.com/424e1600344c073c4b94a37cc6f5202f](https://i.gyazo.com/424e1600344c073c4b94a37cc6f5202f.gif)](https://gyazo.com/424e1600344c073c4b94a37cc6f5202f)
 
+<br>
+Cellの罫線はシミュレーターのせいでたまに消えたりするようです。
+
 
 
 ## Function
