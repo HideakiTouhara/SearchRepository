@@ -1,4 +1,4 @@
-# SearchRepositoryForWantedly
+# SearchRepository
 
 You can search github repository
 
